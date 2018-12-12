@@ -183,7 +183,8 @@ class SoftDecisionTree(nn.Module):
             self.optimizer.zero_grad()
 
             loss, output = self.cal_loss(data, self.target_onehot)
-            loss.backward(retain_variables=True)
+            #loss.backward(retain_variables=True)
+            loss.backward()
             self.optimizer.step()
             pred = output.data.max(1)[1] # get the index of the max log-probability
             correct += pred.eq(target.data).cpu().sum()
