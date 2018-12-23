@@ -65,8 +65,8 @@ def save_result(acc):
         os.makedirs('./result')
     except:
         print('directory ./result already exists')
-    filename = os.path.join('./result/', 'bp_deep.pickle' if args.deep else 'bp.pickle')
-    f = open(filename,'w')
+    filename = os.path.join('./result/', 'bp.pickle')
+    f = open(filename,'wb')
     pickle.dump(acc, f)
     f.close()
 
@@ -78,4 +78,5 @@ if args.cuda:
 for epoch in range(1, args.epochs + 1):
     model.train_(train_loader, epoch)
     model.test_(test_loader, epoch)
-save_result()
+
+save_result(model)
